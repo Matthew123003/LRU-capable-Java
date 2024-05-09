@@ -1,0 +1,36 @@
+Implementing an LFU (Least Frequently Used) cache eviction scheme with
+ O(1) complexity for all operations requires a combination of data structures.
+  Here's how you can achieve it:
+
+    Hash Map: Use a hash map to store key-value pairs, where the keys are the
+    cache keys, and the values are the corresponding cache entries.
+
+    Doubly Linked List of Frequency Buckets: Maintain a doubly linked list where
+     each node represents a frequency bucket. The nodes contain a frequency value
+      and a linked list of cache entries with that frequency.
+
+    Hash Map of Frequencies: Keep another hash map that maps each cache key to
+    its corresponding frequency bucket node in the frequency list.
+
+Here's how the algorithm works:
+
+    When accessing or updating a key in the cache:
+        If the key exists:
+            Update the value.
+            Increase the frequency of the corresponding cache entry.
+            Move the cache entry to the next frequency bucket.
+        If the key doesn't exist:
+            If the cache is full, remove the least frequently used entry from the
+            least frequent bucket.
+            Create a new cache entry with the given key and value.
+            Insert the new cache entry into the frequency bucket with frequency 1.
+            Update the frequency map for the new cache entry.
+
+    When removing the least frequently used entry:
+        Traverse the frequency list from the head.
+        Remove the first entry from the least frequent bucket.
+        Update the frequency map accordingly.
+
+This approach ensures that all operations (get, put, and remove) have O(1) time
+complexity because each operation involves only constant-time operations on the hash
+ maps and doubly linked lists.
