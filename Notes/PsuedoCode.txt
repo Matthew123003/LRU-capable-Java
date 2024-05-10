@@ -78,3 +78,14 @@ complexity because each operation involves only constant-time operations on the 
  maintaining frequency lists and using a hash table for key-based access. The proposed LFU
  algorithm provides a better alternative with constant-time complexity compared to the current
  best-known approach.
+
+This implementation maintains a cache using a HashMap for key-based access and a HashMap of
+ Sets for maintaining nodes with the same access frequency. The get method retrieves the value
+  associated with a given key and updates the frequency of the accessed node. The put method
+   inserts a new key-value pair into the cache, updating the frequency if the key already exists
+    or evicting the least frequently used item if the cache is full.
+
+The Node class represents a key-value pair along with its frequency of access. The evict method
+ removes the least frequently used item from the cache, and the updateFrequency method adjusts
+  the frequency of a node when it is accessed.
+
