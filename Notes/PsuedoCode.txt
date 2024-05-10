@@ -34,3 +34,47 @@ Here's how the algorithm works:
 This approach ensures that all operations (get, put, and remove) have O(1) time
 complexity because each operation involves only constant-time operations on the hash
  maps and doubly linked lists.
+
+ The proposed LFU (Least Frequently Used) algorithm presented in the paper achieves O(1)
+  time complexity for all operations including insertion, lookup, and deletion (eviction).
+   Here's a summary of the algorithm:
+
+ 1. **Use Cases**: LFU can be superior in scenarios where caching proxies need to maximize
+  the amount of cached data in limited storage by evicting infrequently used resources.
+
+ 2. **Dictionary Operations**:
+    - Set (Insert): O(1)
+    - Retrieve (Lookup): O(1)
+    - Evict (Delete): O(1)
+
+ 3. **Current Best-Known Complexity**:
+    - Insert: O(log n)
+    - Lookup: O(log n)
+    - Delete: O(log n)
+    The best-known LFU algorithm typically uses a min heap data structure and a hash map,
+     resulting in logarithmic time complexity.
+
+ 4. **Proposed LFU Algorithm**:
+    - Maintain two linked lists: one for access frequency and one for elements with the same
+     frequency.
+    - Use a hash table for key-based access to elements.
+    - Each node in the frequency list represents a set of elements with the same access frequency.
+    - Operations:
+      - Insert: O(1) - Create a new node and add it to the appropriate frequency list.
+      - Access: O(1) - Increment the access frequency of the element and move it to the next
+       frequency list if needed.
+      - Delete: O(1) - Remove the least frequently used element, adjusting the frequency list
+      as necessary.
+
+ 5. **Implementation**:
+    - Initialize LFU Cache: Create hash table for key-based access and an empty frequency list.
+    - Access: Retrieve element by key, update its frequency, and move it to the appropriate
+    frequency list.
+    - Insert: Check if key exists, create a new node in the frequency list if needed, and add the
+     element to the cache.
+    - Evict: Remove least frequently used element from the cache.
+
+ This algorithm ensures O(1) time complexity for all dictionary operations by efficiently
+ maintaining frequency lists and using a hash table for key-based access. The proposed LFU
+ algorithm provides a better alternative with constant-time complexity compared to the current
+ best-known approach.
